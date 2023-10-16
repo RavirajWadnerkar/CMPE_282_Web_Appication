@@ -4,6 +4,7 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+    /*text-align: center;*/
 }
 
 /* Style the form container */
@@ -11,15 +12,46 @@ form {
     max-width: 500px;
     margin: 0 auto;
     background: #fff;
-    padding: 20px;
+    padding: 50px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Style form headings */
-h1, h2 {
+h1 {
     color: #333;
+    font-size: 36px;
+    margin-top: 50px;
     text-align: center;
+}
+
+p {
+    color: #555;
+    font-size: 18px;
+    margin-top: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-register {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.login-register a {
+    text-decoration: none;
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all ease 0.5s;
+    margin: 10px;
+}
+
+.login-register a:hover {
+    background-color: #0056b3;
 }
 
 /* Style form labels and input fields */
@@ -29,20 +61,30 @@ label {
     font-weight: bold;
 }
 
-input[type="text"] {
-    width: 100%;
+input[type="file"] {
+    margin: 10px 0;
+}
+
+input[type="text"],input[type="password"] {
+    width: 75%;
     padding: 10px;
     margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
-input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
+input[type="submit"] {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
     border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
 }
 
 button {
@@ -66,10 +108,27 @@ ul {
 
 ul li a {
     text-decoration: none;
-    color: #007BFF;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
 }
 
 /* Adjust spacing for the list item */
 li {
     margin: 10px 0;
+}
+
+section {
+    max-width: 500px;
+    margin: 100px auto;
+    padding: 50px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.index {
+    margin: 0 35% 0 54%;
+    max-width: 200px;
+    text-align: right;
 }
