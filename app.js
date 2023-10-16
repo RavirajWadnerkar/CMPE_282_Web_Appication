@@ -6,7 +6,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -215,6 +215,6 @@ app.get('/dashboard', (req, res) => {
 });
 
 // Start the server
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
     console.log(`Server is running on port ${port}`);
 });
