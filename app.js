@@ -128,7 +128,11 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 //home page
-app.get('/', (req, res) => {
+app.get('/home', (req, res) => {
+    res.sendFile(__dirname + '/home.html');
+  });
+
+app.get('/index', (req, res) => {
     res.sendFile(__dirname + '/index.html');
   });
 
