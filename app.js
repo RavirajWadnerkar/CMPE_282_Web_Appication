@@ -74,7 +74,7 @@ app.get('/CSS/styles.css', (req, res) => {
 // Register User
 app.post('/register', async (req, res) => {
     const { username, password } = req.body;
-    
+    console.log(username, password);
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
