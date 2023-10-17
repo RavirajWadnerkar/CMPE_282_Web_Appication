@@ -51,8 +51,6 @@ aws.config.update({
 
 const s3 = new aws.S3();
 
-
-
 db.connect((err) => {
     if (err) throw err;
     console.log('Connected to MySQL database');
@@ -70,17 +68,16 @@ app.get('/CSS/styles.css', (req, res) => {
   res.sendFile(__dirname + '/CSS/styles.css'); // Adjust the path accordingly
 });
 
-
 // Register User
 app.post('/register', async (req, res) => {
-    const { username, password } = req.body;
-    console.log(username, password);
+    const { firstName, lastName, username, password } = req.body;
+    console.log(firstName, lastName, username, password);
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Insert user into the database
     const sql = 'INSERT INTO users (username, password) VALUES (?, ?)';
-    db.query(sql, [username, hashedPassword], (err, result) => {
+    db.query(sql, [firstName, lastName, username, hashedPassword], (err, result) => {
         if (err) {
             console.error(err);
             res.send('Registration failed');
@@ -114,8 +111,10 @@ app.post('/login', async (req, res) => {
             if (passwordMatch) {
                 req.session.userId = user.id;
                 res.send('Login successful');
+                res.redirect('/');
             } else {
                 res.send('Incorrect password');
+                res.redirect('/login');
             }
         }
     });
@@ -132,13 +131,17 @@ app.get('/home', (req, res) => {
     res.sendFile(__dirname + '/home.html');
   });
 
-app.get('/index', (req, res) => {
+app.get('/file-upload', (req, res) => {
     res.sendFile(__dirname + '/index.html');
+  });
+
+app.get('/admin-login', (req, res) => {
+    res.sendFile(__dirname + '/admin-login.html');
   });
 
 // Handle file upload
 app.post('/upload', upload.single('file'), (req, res) => {
-  const { firstName, lastName, description } = req.body;
+  const { description } = req.body;
   const file = req.file;
 
   const params = {
@@ -146,8 +149,8 @@ app.post('/upload', upload.single('file'), (req, res) => {
     Key: file.originalname,
     Body: file.buffer,
     Metadata: {
-      'firstname': firstName,
-      'lastname': lastName,
+      //'firstname': firstName,
+      //'lastname': lastName,
       'description': description,
     },
   };
@@ -157,7 +160,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
       console.error(err);
       res.send('Error uploading the file.');
     } else {
-      res.redirect('/list');
+      res.redirect('/dashboard');
     }
   });
 });
@@ -173,7 +176,7 @@ app.get('/list', (req, res) => {
       console.error(err);
       res.send('Error listing files.');
     } else {
-      let fileList = '<h1>File List</h1><ul>';
+      let fileList = '<title>File List</title> <h1>File List</h1><ul>';
       data.Contents.forEach((file) => {
         fileList += `<li><a href="/download/${file.Key}">${file.Key}</a></li>`;
       });
@@ -208,6 +211,7 @@ app.get('/download/:key', (req, res) => {
 // Dashboard Page (Protected Route)
 app.get('/dashboard', (req, res) => {
     if (req.session.userId) {
+        res.sendFile(__dirname + '/user-dashboard.html');
         res.send('Welcome to the dashboard!');
     } else {
         res.redirect('/login');
