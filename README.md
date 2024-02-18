@@ -1,6 +1,6 @@
 # Campus Files
 
-This Webapp lets users to upload their files and retrieve them anytime and anywhere. To view how it works from both frontend and backend you can also refer the word doc or videos in the Videos folder.
+This Webapp lets users to upload their files and retrieve them anytime and anywhere. Database is on AWS and it is highly scalable and multi region.
 
 To use this app in local: 
 
@@ -11,4 +11,3 @@ To use this app in local:
 - Run the app using the command "node app.js".
 
 - It should be running at port 3000.
-
